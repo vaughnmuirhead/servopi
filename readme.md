@@ -28,7 +28,7 @@ This project uses a 3d printed linear actuator apparatus, a raspberry pi and a s
          python servopi/servo.py off
          python servopi/servo.py warmer
         ```
-- You may need to calibrate the angle of the servo for your particular thermostat and temperature preferances. Just modify the servo.py script angle variables to an angle between 0 and 180.
+- You may need to calibrate the angle of the servo for your particular thermostat and temperature preferences. Just modify the servo.py script angle variables to an angle between 0 and 180.
 - Stick the apparatus to the wall with double sided mounting tape https://www.bunnings.com.au/moroday-6mm-x-10m-grey-double-sided-body-mounting-tape_p0057719?store=6037
 - stick the battery holder to the wall with the same tape and put the battery in.
 - Plug in your pi and enjoy!
