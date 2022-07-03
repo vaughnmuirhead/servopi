@@ -4,11 +4,11 @@ import sys
 
 mode = sys.argv[1]
 if mode == 'on':
-  angle = 108
+  angle = 106
 elif mode == 'off':
   angle = 180
 elif mode == 'warmer':
-  angle = 104
+  angle = 103
 else:
   angle = 0
 GPIO.setmode(GPIO.BOARD)
