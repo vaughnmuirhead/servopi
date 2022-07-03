@@ -4,7 +4,7 @@ import sys
 
 mode = sys.argv[1]
 if mode == 'on':
-  angle = 106
+  angle = 108
 elif mode == 'off':
   angle = 180
 elif mode == 'warmer':
