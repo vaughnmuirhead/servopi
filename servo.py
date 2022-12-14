@@ -1,8 +1,15 @@
 import RPi.GPIO as GPIO
 import time
 import sys
+import logging
+
+logger = logging.getLogger(__name__)
+
+logger.debug('Starting script...')
 
 mode = sys.argv[1]
+logger.debug(f'Mode is" {mode}')
+
 if mode == 'on':
   angle = 108
 elif mode == 'off':
@@ -22,6 +29,10 @@ try:
   time.sleep(0.5)
   servo1.ChangeDutyCycle(0)
 
+except Exception as e:
+  logging.info(f'Caught exception: {e}')
+
 finally:
+  logging.debug('Cleaning up.')
   servo1.stop()
   GPIO.cleanup()
