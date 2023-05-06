@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 logger.debug('Starting script...')
 
 mode = sys.argv[1]
-logger.debug(f'Mode is" {mode}')
+logger.debug(f'Mode is {mode}')
 
 if mode == 'on':
   angle = 108
@@ -30,6 +30,7 @@ try:
   servo1.ChangeDutyCycle(2+(angle/18))
   time.sleep(0.5)
   servo1.ChangeDutyCycle(0)
+  logger.info(f'Mode switched to {mode}.')
 
 except Exception as e:
   logging.info(f'Caught exception: {e}')
