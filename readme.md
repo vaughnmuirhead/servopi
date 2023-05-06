@@ -24,9 +24,10 @@ This project uses a 3d printed linear actuator apparatus, a raspberry pi and a s
 - Download the ssh button app for your Android phone https://play.google.com/store/apps/details?id=com.pd7l.sshbutton&hl=en_AU&gl=US
     - Configure a new ssh button to run the servo.py script with each of the following commands:
         ``` ssh
-         python servopi/servo.py on
-         python servopi/servo.py off
-         python servopi/servo.py warmer
+         python3 servopi/servo.py lesswarm
+         python3 servopi/servo.py on
+         python3 servopi/servo.py off
+         python3 servopi/servo.py warmer
         ```
 - You may need to calibrate the angle of the servo for your particular thermostat and temperature preferences. Just modify the servo.py script angle variables to an angle between 0 and 180.
 - Stick the apparatus to the wall with double sided mounting tape https://www.bunnings.com.au/moroday-6mm-x-10m-grey-double-sided-body-mounting-tape_p0057719?store=6037
