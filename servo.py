@@ -16,6 +16,8 @@ elif mode == 'off':
   angle = 180
 elif mode == 'warmer':
   angle = 103
+elif mode == 'lesswarm':
+  angle = 98
 else:
   angle = 0
 GPIO.setmode(GPIO.BOARD)
