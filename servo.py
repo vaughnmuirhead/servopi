@@ -8,6 +8,8 @@ logger.setLevel(logging.DEBUG)
 
 logger.debug('Starting script...')
 
+INCREMENT = 4
+
 def main():
   mode = sys.argv[1]
   logger.debug(f'Mode is {mode}')
@@ -22,14 +24,14 @@ def main():
     angle = 113
   elif mode == 'up':
     state = get_state()
-    if state > 2:
-      angle = state - 2
+    if state > INCREMENT:
+      angle = state - INCREMENT
     else:
       logger.info(f'Servo is already at upper bound: {state}')
   elif mode == 'down':
     state = get_state()
     if state < 180:
-      angle = state + 2
+      angle = state + INCREMENT
     else:
       logger.info(f'Servo is already at lower bound: {state}')
   else:
