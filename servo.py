@@ -24,10 +24,14 @@ def main():
     state = get_state()
     if state > 2:
       angle = state - 2
+    else:
+      logger.info(f'Servo is already at upper bound: {state}')
   elif mode == 'down':
     state = get_state()
     if state < 180:
       angle = state + 2
+    else:
+      logger.info(f'Servo is already at lower bound: {state}')
   else:
     angle = 0
   
