@@ -12,21 +12,16 @@ def main():
   logger.debug(f'Mode is {mode}')
 
   if mode == 'on':
-    logging.info(f'mode received is: {mode}')
     angle = 108
   elif mode == 'off':
-    logging.info(f'mode received is: {mode}')
     angle = 180
   elif mode == 'warmer':
-    logging.info(f'mode received is: {mode}')
     angle = 103
   elif mode == 'lesswarm':
-    logging.info(f'mode received is: {mode}')
     angle = 113
   elif mode == 'up':
-    logging.info(f'mode received is: {mode}')
     state = get_state()
-    angle = int(state) - 2
+    angle = state - 2
   else:
     angle = 0
   
@@ -59,13 +54,13 @@ def set_servo(angle):
 def set_state(state):
   logging.info(f'Setting state: {state}')
   f = open("servostate.txt", "w")
-  f.write(state)
+  f.write(str(state))
 
 def get_state():
   f = open("servostate.txt", "r")
   state = f.read()
   logging.info(f'Returning state: {state}')
-  return state
+  return int(state)
 
 if __name__ == '__main__':
     main()
