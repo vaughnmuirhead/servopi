@@ -21,7 +21,12 @@ def main():
     angle = 113
   elif mode == 'up':
     state = get_state()
-    angle = state - 2
+    if state > 2:
+      angle = state - 2
+  elif mode == 'down':
+    state = get_state()
+    if state < 180:
+      angle = state + 2
   else:
     angle = 0
   
