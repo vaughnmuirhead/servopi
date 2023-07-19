@@ -8,8 +8,14 @@ logger.setLevel(logging.DEBUG)
 
 logger.debug('Starting script...')
 
+INCREMENT = 4
+
 def main():
   mode = sys.argv[1]
+  if (sys.argv > 2): #  Check for existence of second param representing delay
+    delay = int(sys.argv[2])
+    logger.debug(f'Sleeping for {delay} seconds...')
+    time.sleep(delay)
   logger.debug(f'Mode is {mode}')
 
   if mode == 'on':
@@ -22,14 +28,14 @@ def main():
     angle = 113
   elif mode == 'up':
     state = get_state()
-    if state > 2:
-      angle = state - 2
+    if state > INCREMENT:
+      angle = state - INCREMENT
     else:
       logger.info(f'Servo is already at upper bound: {state}')
   elif mode == 'down':
     state = get_state()
     if state < 180:
-      angle = state + 2
+      angle = state + INCREMENT
     else:
       logger.info(f'Servo is already at lower bound: {state}')
   else:
