@@ -4,7 +4,7 @@ import sys
 import logging
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.debug)
+logger.setLevel(logging.DEBUG)
 
 logger.debug('Starting script...')
 
