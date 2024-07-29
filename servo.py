@@ -3,8 +3,9 @@ import time
 import sys
 import logging
 
+logging.basicConfig(level=logging.NOTSET)
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 logger.debug('Starting script...')
 
@@ -61,22 +62,22 @@ def set_servo(angle):
     logger.info(f'Mode switched to {angle}.')
 
   except Exception as e:
-    logging.info(f'Caught exception: {e}')
+    logger.info(f'Caught exception: {e}')
 
   finally:
-    logging.debug('Cleaning up.')
+    logger.debug('Cleaning up.')
     servo1.stop()
     GPIO.cleanup()
 
 def set_state(state):
-  logging.info(f'Setting state: {state}')
+  logger.info(f'Setting state: {state}')
   f = open("servostate.txt", "w")
   f.write(str(state))
 
 def get_state():
   f = open("servostate.txt", "r")
   state = f.read()
-  logging.info(f'Returning state: {state}')
+  logger.info(f'Returning state: {state}')
   return int(state)
 
 if __name__ == '__main__':
