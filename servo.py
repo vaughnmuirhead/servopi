@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.NOTSET)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-logger.debug('Starting script...')
+logger.info('Starting script...')
 
 INCREMENT = 4
 
@@ -18,7 +18,7 @@ def main():
     logger.info(f'Sleeping for {delay} seconds...')
     time.sleep(delay)
     
-  logger.debug(f'Mode is {mode}')
+  logger.info(f'Mode is {mode}')
 
   if mode == 'on':
     angle = 108
