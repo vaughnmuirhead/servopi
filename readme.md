@@ -43,7 +43,7 @@ This project uses a 3d printed linear actuator apparatus, a raspberry pi and a s
          python3 servopi/servo.py down
 
          # Set a delay in seconds before executing the command (this example can be used to set a delay for any other command as well.)
-         nohup python3 servopi/servo.py off 3600 &
+         nohup python3 servopi/servo.py off 3600
 
         ```
 - You may need to calibrate the angle of the servo for your particular thermostat and temperature preferences. Just modify the servo.py script angle variables to an angle between 0 and 180.
