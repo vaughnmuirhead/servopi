@@ -14,8 +14,9 @@ def main():
   mode = sys.argv[1]
   if (len(sys.argv) > 2): #  Check for existence of second param representing delay
     delay = int(sys.argv[2])
-    logger.debug(f'Sleeping for {delay} seconds...')
+    logger.info(f'Sleeping for {delay} seconds...')
     time.sleep(delay)
+    
   logger.debug(f'Mode is {mode}')
 
   if mode == 'on':
