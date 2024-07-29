@@ -12,7 +12,7 @@ INCREMENT = 4
 
 def main():
   mode = sys.argv[1]
-  if (sys.argv > 2): #  Check for existence of second param representing delay
+  if (len(sys.argv) > 2): #  Check for existence of second param representing delay
     delay = int(sys.argv[2])
     logger.debug(f'Sleeping for {delay} seconds...')
     time.sleep(delay)
