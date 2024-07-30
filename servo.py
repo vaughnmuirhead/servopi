@@ -3,6 +3,7 @@
 import time
 import sys
 import logging
+from pathlib import Path
 try:
     import RPi.GPIO as GPIO
 except ImportError as err:
@@ -18,6 +19,7 @@ logger.setLevel(logging.INFO)
 logger.info('Starting script...')
 
 INCREMENT = 4
+state_file = Path(__file__).with_name('servostate.txt')
 
 def main():
     """Main function"""
@@ -86,12 +88,12 @@ def set_state(state):
     """Set state of servo"""
 
     logger.info('Setting state: %s', state)
-    f = open("servostate.txt", "w", encoding="utf-8")
+    f = open(state_file, "w", encoding="utf-8")
     f.write(str(state))
 
 def get_state():
     """Get state of servo"""
-    f = open("servostate.txt", "r", encoding="utf-8")
+    f = open(state_file, "r", encoding="utf-8")
     state = f.read()
     logger.info('Returning state: %s', state)
     return int(state)
