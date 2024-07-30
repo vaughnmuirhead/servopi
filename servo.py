@@ -1,7 +1,12 @@
-import RPi.GPIO as GPIO
+"""servopy module"""
+
 import time
 import sys
 import logging
+try:
+    import RPi.GPIO as GPIO
+except ImportError as err:
+    raise ImportError('Import error') from err
 
 logging.basicConfig(level=logging.NOTSET)
 logger = logging.getLogger(__name__)
@@ -12,74 +17,81 @@ logger.info('Starting script...')
 INCREMENT = 4
 
 def main():
-  mode = sys.argv[1]
-  if (len(sys.argv) > 2): #  Check for existence of second param representing delay
-    logger.info('Delay argument found.')
-    delay = int(sys.argv[2])
-    logger.info(f'Sleeping for {delay} seconds...')
-    time.sleep(delay)
-    
-  logger.info(f'Mode is {mode}')
+    """Main function"""
 
-  if mode == 'on':
-    angle = 108
-  elif mode == 'off':
-    angle = 180
-  elif mode == 'warmer':
-    angle = 103
-  elif mode == 'lesswarm':
-    angle = 113
-  elif mode == 'up':
-    state = get_state()
-    if state > INCREMENT:
-      angle = state - INCREMENT
+    mode = sys.argv[1]
+    if len(sys.argv) > 2: #  Check for existence of second param representing delay
+        logger.info('Delay argument found.')
+        delay = int(sys.argv[2])
+        logger.info('Sleeping for %s seconds...', delay)
+        time.sleep(delay)
+
+    logger.info('Mode is %s.', mode)
+
+    if mode == 'on':
+        angle = 108
+    elif mode == 'off':
+        angle = 180
+    elif mode == 'warmer':
+        angle = 103
+    elif mode == 'lesswarm':
+        angle = 113
+    elif mode == 'up':
+        state = get_state()
+        if state > INCREMENT:
+            angle = state - INCREMENT
+        else:
+            logger.info('Servo is already at upper bound: %s', state)
+    elif mode == 'down':
+        state = get_state()
+        if state < 180:
+            angle = state + INCREMENT
+        else:
+            logger.info('Servo is already at lower bound: %s', state)
     else:
-      logger.info(f'Servo is already at upper bound: {state}')
-  elif mode == 'down':
-    state = get_state()
-    if state < 180:
-      angle = state + INCREMENT
-    else:
-      logger.info(f'Servo is already at lower bound: {state}')
-  else:
-    angle = 0
-  
-  set_servo(180) # Set servo to 180 first
-  set_servo(angle)
-  set_state(angle)
+        angle = 0
+
+    set_servo(180) # Set servo to 180 first
+    set_servo(angle)
+    set_state(angle)
 
 def set_servo(angle):
-  logger.info(f'Moving servo...')
+    """Function sets servo angle"""
 
-  GPIO.setmode(GPIO.BOARD)
-  GPIO.setup(11,GPIO.OUT)
-  servo1 = GPIO.PWM(11,50)
-  servo1.start(0)
+    logger.info('Moving servo...')
 
-  try:
-    servo1.ChangeDutyCycle(2+(angle/18))
-    time.sleep(0.5)
-    servo1.ChangeDutyCycle(0)
-    logger.info(f'Mode switched to {angle}.')
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(11,GPIO.OUT)
+    servo1 = GPIO.PWM(11,50)
+    servo1.start(0)
 
-  except Exception as e:
-    logger.info(f'Caught exception: {e}')
+    try:
+        servo1.ChangeDutyCycle(2+(angle/18))
+        time.sleep(0.5)
+        servo1.ChangeDutyCycle(0)
+        logger.info('Mode switched to %s.', angle)
 
-  finally:
-    logger.debug('Cleaning up.')
-    servo1.stop()
-    GPIO.cleanup()
+    except Exception as e:
+        logger.info('Caught exception: %s', e)
+
+    finally:
+        logger.debug('Cleaning up.')
+        servo1.stop()
+        GPIO.cleanup()
 
 def set_state(state):
-  logger.info(f'Setting state: {state}')
-  f = open("servostate.txt", "w")
-  f.write(str(state))
+    """Set state of servo"""
+
+    logger.info('Setting state: %s', state)
+    f = open("servostate.txt", "w", encoding="utf-8")
+    f.write(str(state))
 
 def get_state():
-  f = open("servostate.txt", "r")
-  state = f.read()
-  logger.info(f'Returning state: {state}')
-  return int(state)
+    """Get state of servo"""
+    f = open("servostate.txt", "r", encoding="utf-8")
+    state = f.read()
+    logger.info('Returning state: %s', state)
+    return int(state)
 
 if __name__ == '__main__':
     main()
