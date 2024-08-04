@@ -7,7 +7,8 @@ from pathlib import Path
 try:
     import RPi.GPIO as GPIO
 except ImportError as err:
-    raise ImportError('Import error') from err
+    # raise ImportError('Import error') from err
+    pass
 
 logging.basicConfig(level=logging.NOTSET,
                     format='%(asctime)s %(levelname)-8s %(message)s',
@@ -30,6 +31,12 @@ def main():
         delay = int(sys.argv[2])
         logger.info('Sleeping for %s seconds...', delay)
         time.sleep(delay)
+    handle_action(mode)
+
+
+
+def handle_action(mode):
+    """Handles device mode"""
 
     logger.info('Mode is %s.', mode)
 
