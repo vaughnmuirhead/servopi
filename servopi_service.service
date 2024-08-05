@@ -6,6 +6,7 @@ After=network.target network-online.target
 
 [Service]
 Environment="ENVIRONMENT=prod"
+User=pi
 
 WorkingDirectory=/home/pi/servopi
 Type=simple
