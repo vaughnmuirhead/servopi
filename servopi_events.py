@@ -25,8 +25,8 @@ def main():
     """Main function"""
     # create database doc event listener
     db.reference('/heater').listen(heater_event_listener)
+    logger.info('Listening for events...')
     while True:
-        logger.info('Listening for events...')
         time.sleep(5)
 
 def heater_event_listener(event):
