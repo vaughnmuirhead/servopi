@@ -26,12 +26,12 @@ def main():
     # create database doc event listener
     db.reference('/heater').listen(heater_event_listener)
     while True:
-        print('Listening for events...')
+        logger.info('Listening for events...')
         time.sleep(5)
 
 def heater_event_listener(event):
     """Handle database doc events"""
-    print(event.data)
+    logger.debug(event.data)
     if "on" in event.data:
         logger.info("Event received: %s", event.data)
         heater_state = event.data['on']
