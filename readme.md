@@ -75,8 +75,17 @@ This make it more complicated but quite a bot cooler. Will try to make sure the 
 
 ### Installation
 
-#### Todo: Firebase setup
-
+#### Firebase setup
+```bash
+# These steps basically come from here https://developers.home.google.com/codelabs/smarthome-washer
+cd firebase
+npm install -g firebase-tools
+npm install -g firebase-tools
+firebase login --no-localhost
+firebase use <gcp-project-id>
+firebase init  # Choose Realtime Database, Functions, and Hosting options
+firebase deploy. # Use firebase deploy --only functions if you only want to deploy the functions
+```
 #### pi setup
 
     ```bash
