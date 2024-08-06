@@ -42,8 +42,30 @@ def heater_event_listener(event):
             logger.info("Heater False state recieved.")
             servo.handle_action("off")
 
-    if "temperature" in event.data:
-        pass
+    if "temperatureSetpointCelsius" in event.data:
+        temp = event.data['temperatureSetpointCelsius']['temperature']
+        logger.info("Received temperature set event: %s", temp)
+        mode = get_mode(temp)
+        if mode is not None:
+            logger.info("Mode mapped to %s", mode)
+            servo.handle_action(mode)
+
+def get_mode(temp):
+    """Maps temperataure input to device modes."""
+    mode = None
+
+    if temp < 17:
+        mode = 'down'
+    elif temp == 17:
+        mode = 'lesswarm'
+    elif temp == 18:
+        mode = 'on'
+    elif temp == 19:
+        mode = 'warmer'
+    elif temp >=20:
+        mode = 'up'
+
+    return mode
 
 if __name__ == '__main__':
     main()
