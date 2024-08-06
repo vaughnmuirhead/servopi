@@ -41,6 +41,7 @@ def heater_event_listener(event):
         elif heater_state is False:
             logger.info("Heater False state recieved.")
             servo.handle_action("off")
+    if ""
 
 if __name__ == '__main__':
     main()
