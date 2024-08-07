@@ -23,29 +23,31 @@ This project uses a 3d printed linear actuator apparatus, a raspberry pi and a s
 - Clone this git repo to your pi user home directory
 - Download the ssh button app for your Android phone <https://play.google.com/store/apps/details?id=com.pd7l.sshbutton&hl=en_AU&gl=US>
   - Configure a new ssh button to run the servo.py script with each of the following commands:
-        ``` ssh
-         # Turn heat on to preset interval
-         python3 servopi/servo.py on
 
-         # Turn heat on to lower preset interval
-         python3 servopi/servo.py lesswarm
+    ```ssh
+      # Turn heat on to preset interval
+      python3 servopi/servo.py on
 
-         # Turn heat off
-         python3 servopi/servo.py off
+      # Turn heat on to lower preset interval
+      python3 servopi/servo.py lesswarm
 
-         # Turn heat on to higher preset interval
-         python3 servopi/servo.py warmer
+      # Turn heat off
+      python3 servopi/servo.py off
 
-         # Move the temp up by preset interval
-         python3 servopi/servo.py up
+      # Turn heat on to higher preset interval
+      python3 servopi/servo.py warmer
 
-         # Move the temp down by preset interval
-         python3 servopi/servo.py down
+      # Move the temp up by preset interval
+      python3 servopi/servo.py up
 
-         # Set a delay in seconds before executing the command (this example can be used to set a delay for any other command as well.)
-         nohup python3 servopi/servo.py off 3600 >> nohup.out 2>&1 &
+      # Move the temp down by preset interval
+      python3 servopi/servo.py down
 
-        ```
+      # Set a delay in seconds before executing the command (this example can be used to set a delay for any other command as well.)
+      nohup python3 servopi/servo.py off 3600 >> nohup.out 2>&1 &
+
+    ```
+
 - You may need to calibrate the angle of the servo for your particular thermostat and temperature preferences. Just modify the servo.py script angle variables to an angle between 0 and 180.
 - Stick the apparatus to the wall with double sided mounting tape <https://www.bunnings.com.au/moroday-6mm-x-10m-grey-double-sided-body-mounting-tape_p0057719?store=6037>
 - stick the battery holder to the wall with the same tape and put the battery in.
@@ -59,7 +61,7 @@ This make it more complicated but quite a bot cooler. Will try to make sure the 
 
 ### Steps to increase swap size
 
-    ```
+    ```bash
     # Turn off swap
     sudo dphys-swapfile swapoff
 
@@ -76,16 +78,19 @@ This make it more complicated but quite a bot cooler. Will try to make sure the 
 ### Installation
 
 #### Firebase setup
-```bash
-# These steps basically come from here https://developers.home.google.com/codelabs/smarthome-washer
-cd firebase
-npm install -g firebase-tools
-npm install -g firebase-tools
-firebase login --no-localhost
-firebase use <gcp-project-id>
-firebase init  # Choose Realtime Database, Functions, and Hosting options
-firebase deploy. # Use firebase deploy --only functions if you only want to deploy the functions
-```
+
+* Note: This Google Home integration is a work in progress and basically hacked to work from the Google codelabs smarthome-washer code example. This works now but requires some major cleanup and secure implemenation.
+
+    ```bash
+    # These steps basically come from here https://developers.home.google.com/codelabs/smarthome-washer
+    cd firebase
+    npm install -g firebase-tools
+    npm install -g firebase-tools
+    firebase login --no-localhost
+    firebase use <gcp-project-id>
+    firebase init  # Choose Realtime Database, Functions, and Hosting options
+    firebase deploy. # Use firebase deploy --only functions if you only want to deploy the functions
+    ```
 #### pi setup
 
     ```bash
