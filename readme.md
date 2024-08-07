@@ -61,19 +61,19 @@ This make it more complicated but quite a bot cooler. Will try to make sure the 
 
 ### Steps to increase swap size
 
-    ```bash
-    # Turn off swap
-    sudo dphys-swapfile swapoff
+  ```bash
+  # Turn off swap
+  sudo dphys-swapfile swapoff
 
-    # edit swap config to increase to 2048 (CONF_SWAPSIZE=2048)
-    sudo nano /etc/dphys-swapfile
+  # edit swap config to increase to 2048 (CONF_SWAPSIZE=2048)
+  sudo nano /etc/dphys-swapfile
 
-    # Reload swap config
-    sudo dphys-swapfile setup
+  # Reload swap config
+  sudo dphys-swapfile setup
 
-    # Re-enable swap
-    sudo dphys-swapfile swapon
-    ```
+  # Re-enable swap
+  sudo dphys-swapfile swapon
+  ```
 
 ### Installation
 
@@ -81,29 +81,29 @@ This make it more complicated but quite a bot cooler. Will try to make sure the 
 
 * Note: This Google Home integration is a work in progress and basically hacked to work from the Google codelabs smarthome-washer code example. This works now but requires some major cleanup and secure implemenation.
 
-    ```bash
-    # These steps basically come from here https://developers.home.google.com/codelabs/smarthome-washer
-    cd firebase
-    npm install -g firebase-tools
-    npm install -g firebase-tools
-    firebase login --no-localhost
-    firebase use <gcp-project-id>
-    firebase init  # Choose Realtime Database, Functions, and Hosting options
-    firebase deploy. # Use firebase deploy --only functions if you only want to deploy the functions
-    ```
+  ```bash
+  # These steps basically come from here https://developers.home.google.com/codelabs/smarthome-washer
+  cd firebase
+  npm install -g firebase-tools
+  npm install -g firebase-tools
+  firebase login --no-localhost
+  firebase use <gcp-project-id>
+  firebase init  # Choose Realtime Database, Functions, and Hosting options
+  firebase deploy. # Use firebase deploy --only functions if you only want to deploy the functions
+  ```
 #### pi setup
 
-    ```bash
-    # CD to servopi directory
-    # install python packages
-    pip3 install -r requirements.txt
+  ```bash
+  # CD to servopi directory
+  # install python packages
+  pip3 install -r requirements.txt
 
-    # Setup servopi_service
-    sudo cp servopi_service.service /etc/systemd/system/
+  # Setup servopi_service
+  sudo cp servopi_service.service /etc/systemd/system/
 
-    # Enable the service
-    sudo systemctl enable servopi_service
+  # Enable the service
+  sudo systemctl enable servopi_service
 
-    # Start the service
-    sudo systemctl start servopi_service
-    ```
+  # Start the service
+  sudo systemctl start servopi_service
+  ```
