@@ -79,7 +79,9 @@ This make it more complicated but quite a bot cooler. Will try to make sure the 
 
 #### Firebase setup
 
-* Note: This Google Home integration is a work in progress and basically hacked to work from the Google codelabs smarthome-washer code example. This works now but requires some major cleanup and secure implemenation.
+Demo video of this in action is here: <https://youtube.com/shorts/o_Ayq-hIMuc>
+
+- Note: This Google Home integration is a work in progress and basically hacked to work from the Google codelabs smarthome-washer code example. This works now but requires some major cleanup and secure implemenation.
 
   ```bash
   # These steps basically come from here https://developers.home.google.com/codelabs/smarthome-washer
@@ -91,6 +93,7 @@ This make it more complicated but quite a bot cooler. Will try to make sure the 
   firebase init  # Choose Realtime Database, Functions, and Hosting options
   firebase deploy. # Use firebase deploy --only functions if you only want to deploy the functions
   ```
+  
 #### pi setup
 
   ```bash
