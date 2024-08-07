@@ -55,6 +55,10 @@ This project uses a 3d printed linear actuator apparatus, a raspberry pi and a s
 
 ## Working on integration with Google Assistant for Google Home voice command control
 
+Demo video of this in action is here: <https://youtube.com/shorts/o_Ayq-hIMuc>
+
+- Note: This Google Home integration is a work in progress and basically hacked to work from the Google codelabs smarthome-washer code example. This works now but requires some major cleanup and secure implemenation.
+
 This make it more complicated but quite a bot cooler. Will try to make sure the simple version still works as well.
 
 - In order to install the needed Google Firebase packages, I found I needed to increase the swap memory size on my raspberry pi as I am using the zero for this project
@@ -78,10 +82,6 @@ This make it more complicated but quite a bot cooler. Will try to make sure the 
 ### Installation
 
 #### Firebase setup
-
-Demo video of this in action is here: <https://youtube.com/shorts/o_Ayq-hIMuc>
-
-- Note: This Google Home integration is a work in progress and basically hacked to work from the Google codelabs smarthome-washer code example. This works now but requires some major cleanup and secure implemenation.
 
   ```bash
   # These steps basically come from here https://developers.home.google.com/codelabs/smarthome-washer
