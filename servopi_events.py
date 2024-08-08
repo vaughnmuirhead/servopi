@@ -1,6 +1,7 @@
 """Servopi Google Home Event Service"""
 import logging
 import time
+import uuid
 import firebase_admin
 from firebase_admin import credentials
 # Import database module.
@@ -21,6 +22,8 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://servopi-7957-default-rtdb.firebaseio.com'
 })
 
+device_ref = db.reference('/heater')
+
 def main():
     """Main function"""
     # create database doc event listener
@@ -32,23 +35,39 @@ def main():
 def heater_event_listener(event):
     """Handle database doc events"""
     logger.debug(event.data)
-    if "on" in event.data:
-        logger.info("Event received: %s", event.data)
-        heater_state = event.data['on']
-        if heater_state is True:
-            logger.info("Heater True state recieved.")
-            servo.handle_action("on")
-        elif heater_state is False:
-            logger.info("Heater False state recieved.")
-            servo.handle_action("off")
 
-    if "temperatureSetpointCelsius" in event.data:
-        temp = event.data['temperatureSetpointCelsius']['temperature']
-        logger.info("Received temperature set event: %s", temp)
-        mode = get_mode(temp)
-        if mode is not None:
-            logger.info("Mode mapped to %s", mode)
-            servo.handle_action(mode)
+    if "device_update" in event.data:
+        logger.info("device_update %s detected. Ignoring event.", event.data['device_update'])
+
+    else:
+        if "on" in event.data:
+            logger.info("Event received: %s", event.data)
+            heater_state = event.data['on']
+            if heater_state is True:
+                logger.info("Heater True state recieved.")
+                servo.handle_action("on")
+            elif heater_state is False:
+                logger.info("Heater False state recieved.")
+                servo.handle_action("off")
+
+        if "temperatureSetpointCelsius" in event.data:
+            temp = event.data['temperatureSetpointCelsius']['temperature']
+            logger.info("Received temperature set event: %s", temp)
+            mode = get_mode(temp)
+            if mode is not None:
+                logger.info("Mode mapped to %s", mode)
+                servo.handle_action(mode)
+
+                """
+                Create a unique number to signify the device has created the update and it should ignore 
+                the firebase event this update triggers.           
+                """
+                nonce = uuid.uuid4().hex
+
+                device_ref.update({
+                    "device_update": nonce,
+                    "OnOff/on": True
+                    })
 
 def get_mode(temp):
     """Maps temperataure input to device modes."""
