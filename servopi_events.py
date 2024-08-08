@@ -58,10 +58,9 @@ def heater_event_listener(event):
                 logger.info("Mode mapped to %s", mode)
                 servo.handle_action(mode)
 
-                """
-                Create a unique number to signify the device has created the update and it should ignore 
-                the firebase event this update triggers.           
-                """
+                # Create a unique number to signify the device has created the update and it should
+                # ignore the firebase event this update triggers.
+
                 nonce = uuid.uuid4().hex
 
                 device_ref.update({
