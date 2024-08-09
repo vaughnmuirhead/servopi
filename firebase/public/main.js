@@ -87,7 +87,7 @@ SmartHome.prototype.updateState = () => {
 
 
   console.log(pkg);
-  firebase.database().ref('/').child('heater').update(pkg);
+  firebase.database().ref('/').child('heater').update({"OnOff/on:": elOnOff.classList.contains('is-checked')});
 }
 
 // Load the SmartHome.
