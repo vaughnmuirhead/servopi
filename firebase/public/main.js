@@ -67,45 +67,27 @@ SmartHome.prototype.handleData = () => {
   const elStartStopPaused = document.getElementById('demo-washer-startStopPaused');
   const elStartStopRunning = document.getElementById('demo-washer-startStopRunning');
 
-  firebase.database().ref('/').child('washer').on("value", (snapshot) => {
+  firebase.database().ref('/').child('heater').on("value", (snapshot) => {
     if (snapshot.exists()) {
       const washerState = snapshot.val();
       console.log(washerState)
 
       if (washerState.OnOff.on) elOnOff.MaterialSwitch.on();
       else elOnOff.MaterialSwitch.off();
-
-      if (washerState.RunCycle.dummy) elRunCycle.MaterialSwitch.on();
-      else elRunCycle.MaterialSwitch.off();
-
-      if (washerState.StartStop.isPaused) elStartStopPaused.MaterialSwitch.on();
-      else elStartStopPaused.MaterialSwitch.off();
-
-      if (washerState.StartStop.isRunning) elStartStopRunning.MaterialSwitch.on();
-      else elStartStopRunning.MaterialSwitch.off();
-
     }
   })
 }
 
 SmartHome.prototype.updateState = () => {
   const elOnOff = document.getElementById('demo-washer-onOff');
-  const elRunCycle = document.getElementById('demo-washer-runCycle');
-  const elStartStopPaused = document.getElementById('demo-washer-startStopPaused');
-  const elStartStopRunning = document.getElementById('demo-washer-startStopRunning');
 
   const pkg = {
-    OnOff: { on: elOnOff.classList.contains('is-checked') },
-    RunCycle: { dummy: elRunCycle.classList.contains('is-checked') },
-    StartStop: {
-      isPaused: elStartStopPaused.classList.contains('is-checked'),
-      isRunning: elStartStopRunning.classList.contains('is-checked')
-    }
+    OnOff: { on: elOnOff.classList.contains('is-checked') }
   };
 
 
   console.log(pkg);
-  firebase.database().ref('/').child('washer').set(pkg);
+  firebase.database().ref('/').child('heater').update(pkg);
 }
 
 // Load the SmartHome.

@@ -87,7 +87,6 @@ This make it more complicated but quite a bot cooler. Will try to make sure the 
   # These steps basically come from here https://developers.home.google.com/codelabs/smarthome-washer
   cd firebase
   npm install -g firebase-tools
-  npm install -g firebase-tools
   firebase login --no-localhost
   firebase use <gcp-project-id>
   firebase init  # Choose Realtime Database, Functions, and Hosting options
